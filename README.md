@@ -11,10 +11,10 @@ and include an option to save the state of the game and continue later
 Please edit this README with your initials and discord name in () 
 next to your responsibility for the project
 
-Design Base Pong Game         | WP (Whitney)
-Design Player Avatars         |
-Design Game Board Layouts     |
-Design Save/Continue function |
+1) Design Base Pong Game         | WP (Whitney)
+2) Design Player Avatars         |
+3) Design Game Board Layouts     |
+4) Design Save/Continue function |
 
 -----------------------------------------
 
