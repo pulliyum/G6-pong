@@ -20,9 +20,9 @@ next to your responsibility for the project
 
 1) The Game will start with a 'Main Menu'.
   In it, the player is prompted to choose to play Zen or Normal Mode.
-  Zen mode: No Time/Score limit
-  Normal mode: set time limit (Up to 5 minutes) set score limit (Up to 10)
-    Normal mode will go until the time limit or score is reached, whichever comes first.
+  -Zen mode: No Time/Score limit
+  -Normal mode: set time limit (Up to 5 minutes) set score limit (Up to 10)
+    -Normal mode will go until the time limit or score is reached, whichever comes first.
 
 2) Next player will be prompted to select Avatar.
 
