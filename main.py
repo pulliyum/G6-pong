@@ -11,6 +11,12 @@ screen_width = 1280
 screen_height = 960
 screen = pygame.display.set_mode((screen_width, screen_height))
 
+#Fonts
+#Font(*type of font*, *font size*)
+score_font = pygame.font.Font("freesansbold.ttf", 40)
+countdown_font = pygame.font.Font("freesansbold.ttf", 100)
+
+
 #Colors
 bg_color = pygame.Color('grey12')
 red = (230, 70, 75)
@@ -24,6 +30,7 @@ grey = (200, 200, 200)
 ball = pygame.Rect(screen_width/2 - 15, screen_height/2 - 15, 30, 30)
 ball_speed_x = 8 * random.choice((1, -1))
 ball_speed_y = 8 * random.choice((1, -1))
+
 
 #Players
 #pygame.Rect( *position on screen* x, y, *size of player* x, y)
@@ -45,7 +52,11 @@ player_four_speed = 15
 player_four = pygame.Rect(screen_width/2 - 70, screen_height- 100, 140, 30)
 #--------------------------------------------
 
-
+#Score Objects
+player_one_score = 0
+player_two_score = 0
+player_three_score = 0
+player_four_score = 0
 
 
 
@@ -197,12 +208,28 @@ while True:
 
     #Visuals
     screen.fill(bg_color)
+
+    #Scores
+    player_one_text = score_font.render(f"{player_one_score}", False, red)
+    player_two_text = score_font.render(f"{player_two_score}", False, blue)
+    player_three_text = score_font.render(f"{player_three_score}", False, purple)
+    player_four_text = score_font.render(f"{player_four_score}", False, green)
+    #Score Placement on Screen
+    screen.blit(player_one_text, (880, 470))
+    screen.blit(player_two_text, (400, 470))
+    screen.blit(player_three_text, (650, 250))
+    screen.blit(player_four_text, (650, 690))
+
+
+    #Players
     pygame.draw.rect(screen, red, player_one)
-    pygame.draw.rect(screen, purple, player_two)
-    pygame.draw.rect(screen, blue, player_three)
+    pygame.draw.rect(screen, blue, player_two)
+    pygame.draw.rect(screen, purple, player_three)
     pygame.draw.rect(screen, green, player_four)
     pygame.draw.ellipse(screen, grey, ball)
+    #Screen Window
     pygame.draw.aaline(screen, grey, (screen_width / 2, 0), (screen_width / 2, screen_height))
+
 
 
     #Update window
