@@ -22,26 +22,27 @@ grey = (200, 200, 200)
 
 #Game Objects
 ball = pygame.Rect(screen_width/2 - 15, screen_height/2 - 15, 30, 30)
-ball_speed_x = 10 * random.choice((1, -1))
-ball_speed_y = 10 * random.choice((1, -1))
+ball_speed_x = 8 * random.choice((1, -1))
+ball_speed_y = 8 * random.choice((1, -1))
 
 #Players
+#pygame.Rect( *position on screen* x, y, *size of player* x, y)
 #--------------------------------------------
 #Player ONE
 player_one_speed = 0
-player_one = pygame.Rect(screen_width - 40, screen_height/2 - 70, 30, 140)
+player_one = pygame.Rect(screen_width - 100, screen_height/2 - 70, 30, 140)
 
 #Player TWO
 player_two_speed = 0
-player_two = pygame.Rect(10, screen_height/2 - 70, 30, 140)
+player_two = pygame.Rect(100, screen_height/2 - 70, 30, 140)
 
 #Player THREE
-player_three_speed = 0
-player_three = pygame.Rect(screen_width/2 - 70, 10, 140, 30)
+player_three_speed = 15
+player_three = pygame.Rect(screen_width/2 - 70, 100, 140, 30)
 
 #Player FOUR
-player_four_speed = 0
-player_four = pygame.Rect(screen_width/2 - 70, screen_height- 40, 140, 30)
+player_four_speed = 15
+player_four = pygame.Rect(screen_width/2 - 70, screen_height- 100, 140, 30)
 #--------------------------------------------
 
 
@@ -53,28 +54,31 @@ player_four = pygame.Rect(screen_width/2 - 70, screen_height- 40, 140, 30)
 #Game Functions
 #--------------------------------------------
 def ball_movement():
-    #   Ball speed
+    #Ball speed
     global ball_speed_x
     global ball_speed_y
 
     ball.x += ball_speed_x
     ball.y += ball_speed_y
     if ball.top <= 0 or ball.bottom >= screen_height:
-        ball_speed_y *= -1
+        ball_reset()
     if ball.left <= 0 or ball.right >= screen_width:
         ball_reset()
 
     #Collision
     if ball.colliderect(player_one) or ball.colliderect(player_two):
         ball_speed_x *= -1
+    if ball.colliderect(player_three) or ball.colliderect(player_four):
+        ball_speed_y *= -1
 
 def ball_reset():
     #Reset ball to center after point scored
     global ball_speed_x
     global ball_speed_y
-    ball.center = (screen_width/2, screen_height/2)
-    ball_speed_y *= random.choice((1, -1))
+    ball.center = (screen_width/2 -15, screen_height/2 -15)
     ball_speed_x *= random.choice((1, -1))
+    ball_speed_y *= random.choice((1, -1))
+
 
 
 def player_movement():
@@ -83,6 +87,40 @@ def player_movement():
         player_one.top = 0
     if player_one.bottom >= screen_height:
         player_one.bottom = screen_height
+
+    player_two.y += player_two_speed
+    if player_two.top <= 0:
+        player_two.top = 0
+    if player_two.bottom >= screen_height:
+        player_two.bottom = screen_height
+
+def computer_movement():
+
+
+
+    #Player THREE
+    if player_three.left <= ball.x:
+        player_three.left += player_three_speed
+    if player_three.right >= ball.x:
+        player_three.right -= player_three_speed
+
+    if player_three.top <= 0:
+        player_three.top = 0
+    if player_three.bottom >= screen_height:
+        player_three.bottom = screen_height
+
+    #Player FOUR
+    if player_four.left <= ball.x:
+
+        player_four.left += player_four_speed
+    if player_four.right >= ball.x:
+        player_four.right -= player_four_speed
+
+    if player_four.top <= 0:
+        player_four.top = 0
+    if player_four.bottom >= screen_height:
+        player_four.bottom = screen_height
+
 #--------------------------------------------
 
 
@@ -119,19 +157,41 @@ while True:
             sys.exit()
 
         pygame.display.set_caption('Group 6: PONG GAME')
+
+        #When key is PRESSED...
         if event.type == pygame.KEYDOWN:
+            #Player ONE Controls
             if event.key == pygame.K_DOWN:
-                player_one_speed += 10
+                player_one_speed += 15
             if event.key == pygame.K_UP:
-                player_one_speed -= 10
+                player_one_speed -= 15
+
+            #Player TWO Controls
+            if event.key == pygame.K_s:
+                player_two_speed += 15
+            if event.key == pygame.K_w:
+                player_two_speed -= 15
+
+        #When key is RELEASED...
         if event.type == pygame.KEYUP:
+            #Player ONE Controls
             if event.key == pygame.K_DOWN:
-                player_one_speed -= 10
+                player_one_speed -= 15
             if event.key == pygame.K_UP:
-                player_one_speed += 10
+                player_one_speed += 15
+
+            #Player TWO Controls
+            if event.key == pygame.K_s:
+                player_two_speed -= 15
+            if event.key == pygame.K_w:
+                player_two_speed += 15
+
+
 
     ball_movement()
     player_movement()
+    computer_movement()
+
 
 
 
