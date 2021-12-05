@@ -58,7 +58,19 @@ player_two_score = 0
 player_three_score = 0
 player_four_score = 0
 
+#Background
 
+biOne = pygame.image.load('default.png').convert()
+biOne = pygame.transform.scale(biOne, (screen_width, screen_height))
+
+biTwo = pygame.image.load('space.jpg').convert()
+biTwo = pygame.transform.scale(biTwo, (screen_width, screen_height))
+
+biThree = pygame.image.load('underground.jpg').convert()
+biThree = pygame.transform.scale(biThree, (screen_width, screen_height))
+
+background_index = 0
+background_images = [ biOne, biTwo, biThree ]
 
 
 
@@ -155,7 +167,22 @@ pygame.display.set_caption('Player Selection')
 #Game Board Selection Window
 #PLEASE PLACE GAME BOARD SELECTION IN THIS BLOCK
 #--------------------------------------------
-pygame.display.set_caption('Level Selection')
+menu_font = pygame.font.Font('freesansbold.ttf', 65)
+submenu_font = pygame.font.Font('freesansbold.ttf', 25)
+menu = False
+
+def level_menu():
+    # Menu Text
+    global background_index
+    pygame.display.set_caption('Level Selection')
+    menu_text = menu_font.render("***Levels***", True, (255, 255, 255))
+    screen.blit(menu_text, (100 , 50))
+    menu_text = submenu_font.render("1. Default", True, (255, 255, 255))
+    screen.blit(menu_text, (150 , 150))
+    menu_text = submenu_font.render("2. Space", True, (255, 255, 255))
+    screen.blit(menu_text, (150 , 250))
+    menu_text = submenu_font.render("3. Underground", True, (255, 255, 255))
+    screen.blit(menu_text, (150 , 350))
 
 
 #---------------------------------------------
@@ -197,38 +224,59 @@ while True:
             if event.key == pygame.K_w:
                 player_two_speed += 15
 
+         #menu
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_c:
+                menu = False
+            if event.key == pygame.K_l:
+                menu = True
+            if event.key == pygame.K_q:
+                pygame.quit()
+            if event.key == pygame.K_1 and menu:
+                background_index = 0
+                menu = False
+            if event.key == pygame.K_2 and menu:
+                background_index = 1
+                menu = False
+            if event.key == pygame.K_3 and menu:
+                background_index = 2
+                menu = False
+
+    if menu:
+        level_menu()
+    else:
+
+        ball_movement()
+        player_movement()
+        computer_movement()
 
 
-    ball_movement()
-    player_movement()
-    computer_movement()
 
 
+        #Visuals
+        #set background
+        screen.blit(background_images[background_index], [0, 0])
+
+        #Scores
+        player_one_text = score_font.render(f"{player_one_score}", False, red)
+        player_two_text = score_font.render(f"{player_two_score}", False, blue)
+        player_three_text = score_font.render(f"{player_three_score}", False, purple)
+        player_four_text = score_font.render(f"{player_four_score}", False, green)
+        #Score Placement on Screen
+        screen.blit(player_one_text, (880, 470))
+        screen.blit(player_two_text, (400, 470))
+        screen.blit(player_three_text, (650, 250))
+        screen.blit(player_four_text, (650, 690))
 
 
-    #Visuals
-    screen.fill(bg_color)
-
-    #Scores
-    player_one_text = score_font.render(f"{player_one_score}", False, red)
-    player_two_text = score_font.render(f"{player_two_score}", False, blue)
-    player_three_text = score_font.render(f"{player_three_score}", False, purple)
-    player_four_text = score_font.render(f"{player_four_score}", False, green)
-    #Score Placement on Screen
-    screen.blit(player_one_text, (880, 470))
-    screen.blit(player_two_text, (400, 470))
-    screen.blit(player_three_text, (650, 250))
-    screen.blit(player_four_text, (650, 690))
-
-
-    #Players
-    pygame.draw.rect(screen, red, player_one)
-    pygame.draw.rect(screen, blue, player_two)
-    pygame.draw.rect(screen, purple, player_three)
-    pygame.draw.rect(screen, green, player_four)
-    pygame.draw.ellipse(screen, grey, ball)
-    #Screen Window
-    pygame.draw.aaline(screen, grey, (screen_width / 2, 0), (screen_width / 2, screen_height))
+        #Players
+        pygame.draw.rect(screen, red, player_one)
+        pygame.draw.rect(screen, blue, player_two)
+        pygame.draw.rect(screen, purple, player_three)
+        pygame.draw.rect(screen, green, player_four)
+        pygame.draw.ellipse(screen, grey, ball)
+        #Screen Window
+        pygame.draw.aaline(screen, grey, (screen_width / 2, 0), (screen_width / 2, screen_height))
 
 
 
