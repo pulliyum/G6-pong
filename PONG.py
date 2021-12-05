@@ -7,6 +7,7 @@ from PLAYER import *
 from SCORE import *
 from INPUT import handle_input
 #from LEVELS import *
+from AVATAR import *
 
 
 

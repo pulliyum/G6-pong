@@ -45,6 +45,9 @@ class Ball:
     def reset(self):
         self.x = SCREEN_WIDTH // 2
         self.y = SCREEN_HEIGHT // 2
+        self.start()
+
+    def start(self):
         self.vx *= random.choice((1, -1))
         self.vy *= random.choice((1, -1))
 
