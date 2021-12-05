@@ -6,6 +6,7 @@ from BALL import Ball
 from PLAYER import *
 from SCORE import *
 from INPUT import handle_input
+#from LEVELS import *
 
 
 
@@ -33,6 +34,8 @@ score3 = Score(screen, '0', SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4)
 score4 = Score(screen, '0', SCREEN_WIDTH // 2, SCREEN_HEIGHT - SCREEN_HEIGHT // 4)
 
 
+# Game Loop
+#--------------------------------------------------------------------------------------
 while True:
     clock.tick(TICK_RATE)
     keys = pygame.key.get_pressed()
@@ -54,18 +57,14 @@ while True:
     score3.show()
     score4.show()
 
-
-
     ball.draw(screen)
     ball.update(player1, player2, player3, player4)
+
+
 
     if score1.score_player1(ball):
         score1.earn_point()
         ball.reset()
-
-
-
-
 
     pygame.display.flip()
 
