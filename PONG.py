@@ -6,7 +6,7 @@ from BALL import Ball
 from PLAYER import *
 from SCORE import *
 from INPUT import handle_input
-#from LEVELS import *
+from LEVELS import level_menu, background_index, background_images
 from AVATAR import *
 
 
@@ -34,6 +34,8 @@ score2 = Score(screen, '0', SCREEN_WIDTH - SCREEN_WIDTH // 4, SCREEN_HEIGHT // 2
 score3 = Score(screen, '0', SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4)
 score4 = Score(screen, '0', SCREEN_WIDTH // 2, SCREEN_HEIGHT - SCREEN_HEIGHT // 4)
 
+#menu
+menu = False
 
 # Game Loop
 #--------------------------------------------------------------------------------------
@@ -44,28 +46,49 @@ while True:
         if event.type == pygame.QUIT or keys[K_ESCAPE]:
             sys.exit()
 
-    handle_input(player1, player2, player3, player4)
-    screen.fill(GREY)
+    #menu
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_c:
+                menu = False
+            if event.key == pygame.K_l:
+                menu = True
+            if event.key == pygame.K_q:
+                pygame.quit()
+            if event.key == pygame.K_1 and menu:
+                background_index = 0
+                menu = False
+            if event.key == pygame.K_2 and menu:
+                background_index = 1
+                menu = False
+            if event.key == pygame.K_3 and menu:
+                background_index = 2
+                menu = False
 
-    player1.draw(screen, BLUE)
-    player2.draw(screen, RED)
-    player3.draw(screen, GREEN)
-    player4.draw(screen, PURPLE)
+    if menu:
+        level_menu()
+    else:
+        handle_input(player1, player2, player3, player4)
+        screen.blit(background_images[background_index], [0, 0])
+
+        player1.draw(screen, BLUE)
+        player2.draw(screen, RED)
+        player3.draw(screen, GREEN)
+        player4.draw(screen, PURPLE)
 
 
-    score1.show()
-    score2.show()
-    score3.show()
-    score4.show()
+        score1.show()
+        score2.show()
+        score3.show()
+        score4.show()
 
-    ball.draw(screen)
-    ball.update(player1, player2, player3, player4)
+        ball.draw(screen)
+        ball.update(player1, player2, player3, player4)
 
 
 
-    if score1.score_player1(ball):
-        score1.earn_point()
-        ball.reset()
+        if score1.score_player1(ball):
+            score1.earn_point()
+            ball.reset()
 
     pygame.display.flip()
 
