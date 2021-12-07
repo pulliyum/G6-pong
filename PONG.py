@@ -8,6 +8,9 @@ from SCORE import *
 from INPUT import handle_input
 from LEVELS import level_menu, background_index, background_images
 from AVATAR import *
+from avatarselection2 import *
+from avatarselection3 import *
+from avatarselection4 import *
 
 
 
@@ -34,8 +37,66 @@ score2 = Score(screen, '0', SCREEN_WIDTH - SCREEN_WIDTH // 4, SCREEN_HEIGHT // 2
 score3 = Score(screen, '0', SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4)
 score4 = Score(screen, '0', SCREEN_WIDTH // 2, SCREEN_HEIGHT - SCREEN_HEIGHT // 4)
 
+X = 1280
+Y = 1200
+display_surface = pygame.display.set_mode((X, Y))
+
+
+if num == 1:
+    image = pygame.image.load('Avatar1.png')
+if num == 2:
+    image = pygame.image.load('Avatar2.png')
+if num == 3:
+    image = pygame.image.load('Avatar3.png')
+if num == 4:
+    image = pygame.image.load('Avatar4.png')
+if num == 5:
+    image = pygame.image.load('Avatar5.png')
+if num == 6:
+    image = pygame.image.load('Avatar6.png')
+
+if num2 == 1:
+    image2 = pygame.image.load('Avatar1.png')
+if num2 == 2:
+    image2 = pygame.image.load('Avatar2.png')
+if num2 == 3:
+    image2 = pygame.image.load('Avatar3.png')
+if num2 == 4:
+    image2 = pygame.image.load('Avatar4.png')
+if num2 == 5:
+    image2 = pygame.image.load('Avatar5.png')
+if num2 == 6:
+    image2 = pygame.image.load('Avatar6.png')
+
+if num3 == 1:
+    image3 = pygame.image.load('Avatar1.png')
+if num3 == 2:
+    image3 = pygame.image.load('Avatar2.png')
+if num3 == 3:
+    image3 = pygame.image.load('Avatar3.png')
+if num3 == 4:
+    image3 = pygame.image.load('Avatar4.png')
+if num3 == 5:
+    image3 = pygame.image.load('Avatar5.png')
+if num3 == 6:
+    image3 = pygame.image.load('Avatar6.png')
+
+if num4 == 1:
+    image4 = pygame.image.load('Avatar1.png')
+if num4 == 2:
+    image4 = pygame.image.load('Avatar2.png')
+if num4 == 3:
+    image4 = pygame.image.load('Avatar3.png')
+if num4 == 4:
+    image4 = pygame.image.load('Avatar4.png')
+if num4 == 5:
+    image4 = pygame.image.load('Avatar5.png')
+if num4 == 6:
+    image4 = pygame.image.load('Avatar6.png')
+
 #menu
 menu = False
+
 
 # Game Loop
 #--------------------------------------------------------------------------------------
@@ -74,7 +135,10 @@ while True:
         player2.draw(screen, RED)
         player3.draw(screen, GREEN)
         player4.draw(screen, PURPLE)
-
+        display_surface.blit(image, (600, 0))
+        display_surface.blit(image2, (0, 600))
+        display_surface.blit(image3, (1210, 600))
+        display_surface.blit(image4, (600, 1200))
 
         score1.show()
         score2.show()
@@ -82,12 +146,17 @@ while True:
         score4.show()
 
         ball.draw(screen)
-        ball.update(player1, player2, player3, player4)
+        ball.update(player1, player2, player3, player4,)
 
 
 
-        if score1.score_player1(ball):
-            score1.earn_point()
+        if score1.score_player1(ball, player1):
+            ball.reset()
+        if score2.score_player2(ball, player2):
+            ball.reset()
+        if score3.score_player3(ball, player3):
+            ball.reset()
+        if score4.score_player4(ball, player4):
             ball.reset()
 
     pygame.display.flip()

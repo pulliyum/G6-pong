@@ -25,6 +25,15 @@ class Player_1_2:
         self.rect.y = min(self.rect.y, SCREEN_HEIGHT - self.rect.height)
         self.rect.y = max(0, self.rect.y)
 
+    def last_hit(self, ball):
+        if ball.get_rect().colliderect(self):
+            return True
+
+    def score(self, ball):
+        if self.last_hit(ball):
+            if ball.reset():
+                print("reset ball!")
+                return True
 
 class Player_3_4:
     def __init__(self):
@@ -47,3 +56,7 @@ class Player_3_4:
     def keep_in_bounds(self):
         self.rect.x = min(self.rect.x, SCREEN_WIDTH - self.rect.width)
         self.rect.x = max(0, self.rect.x)
+
+    def last_hit(self, ball):
+        if ball.get_rect().colliderect(self):
+            return True
