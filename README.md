@@ -17,7 +17,7 @@ next to your responsibility for the project
 4) Design Save/Continue function |
 
 -----------------------------------------
-
+INITIAL PLAN:
 1) The Game will start with a 'Main Menu'.
   In it, the player is prompted to choose to play Zen or Normal Mode.
   -Zen mode: No Time/Score limit
@@ -29,3 +29,13 @@ next to your responsibility for the project
 3) Next player will be prompted to select Game Board.
 
 4) During the game, player wil be able to pause and exit the game and return at another time.
+
+-----------------------------------------
+
+END RESULT: 
+1) The Game will start with a 'Main Menu'.
+2) Next player will be prompted to select Avatar.
+3) During the game, player wil be able to Change the Game Board
+4) During the game, player wil be able to pause and exit the game and return at another time.
+
+In the end, we were able to deliver all the criteria given to us in the initial feedback.
