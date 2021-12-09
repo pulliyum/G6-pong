@@ -1,11 +1,7 @@
 import pygame
 
-
-# to initalize python
-pygame.init()
-
 # to make the window and have its hight and width be 800 and 600
-screen = pygame.display.set_mode((1260, 960 ))
+screen = pygame.display.set_mode((1280, 960))
 
 # background
 background = pygame.image.load('4290766.jpg')
@@ -17,23 +13,12 @@ color = (0, 0, 0)
 # Title and Icon
 pygame.display.set_caption("Select an Avatar")
 
-
 # players
 playerImg1 = pygame.image.load('Avatar1.png').convert_alpha()
-
-
 playerImg2 = pygame.image.load('Avatar2.png').convert_alpha()
-
-
 playerImg3 = pygame.image.load('Avatar3.png').convert_alpha()
-
-
 playerImg4 = pygame.image.load('Avatar4.png').convert_alpha()
-
-
 playerImg5 = pygame.image.load('Avatar5.png').convert_alpha()
-
-
 playerImg6 = pygame.image.load('Avatar6.png').convert_alpha()
 
 
