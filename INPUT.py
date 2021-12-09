@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from LEVELS import *
+
 
 
 def handle_input(player1, player2, player3, player4):
